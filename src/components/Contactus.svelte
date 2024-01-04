@@ -1,7 +1,7 @@
 
 <!-- contact us section starts -->
 <script>
-  import { EmailService } from '$lib/email.service.js';
+  import { EmailService } from '$lib/email.service';
 
 const emailService = new EmailService();
 let formData = {};
