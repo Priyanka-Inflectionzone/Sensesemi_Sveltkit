@@ -1,6 +1,5 @@
 
-<!-- contact us section starts -->
-<script>
+<script lang="ts">
   import { EmailService } from '$lib/email.service';
 
 const emailService = new EmailService();
@@ -8,7 +7,7 @@ let formData = {};
 
 async function handleSubmit() {
   const emailDetails = {
-    EmailTo: formData.email.trim(),
+    EmailTo: 'priyankakale27@gmail.com',
     Subject: 'New Contact Form Submission',
     Body: 'Greetings from Sensesemi Technologies. Thank you for contacting us. We will get back to you soon.',
   };
@@ -75,7 +74,7 @@ async function handleSubmit() {
 
 <!-- Contact Form -->
 <div class="xl:w-1/2 p-8  ">
-  <form on:submit|preventDefault={handleSubmit} class="text-center">
+  <form class="text-center">
 
     <div class="flex flex-row ">
     <div class="mb-4 border-b-2 mr-12  w-80 ">
@@ -106,7 +105,7 @@ async function handleSubmit() {
       <textarea class="w-full p-2 border border-transparent" rows="4" placeholder="Message" name="message" required></textarea>
     </div>
     <div class="text-right ">
-      <button type="submit" class="bg-blue-900 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded font-poppins">
+      <button on:click={handleSubmit} type="submit" class="bg-blue-900 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded font-poppins">
         Send Message
       </button>
     </div>
