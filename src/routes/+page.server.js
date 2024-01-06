@@ -7,18 +7,15 @@
 // };
 
 
-
-// The load function is an asynchronous function that returns an empty object {} 
+// The load function is an asynchronous function that returns an empty object {}
 export const load = async () =>{
     return{}
   }
-  
+
 
   export const actions ={
   default:async (event) => {
     const formData = Object.fromEntries(await event.request.formData())
     console.log(formData);
-    
   }
-  
 }

@@ -1,25 +1,19 @@
+<script>
 
-<script lang="ts">
-  import { EmailService } from '$lib/email.service';
+import { createEventDispatcher } from 'svelte';
 
-const emailService = new EmailService();
-let formData = {};
+const dispatch = createEventDispatcher();
 
-async function handleSubmit() {
-  const emailDetails = {
-    EmailTo: 'priyankakale27@gmail.com',
-    Subject: 'New Contact Form Submission',
-    Body: 'Greetings from Sensesemi Technologies. Thank you for contacting us. We will get back to you soon.',
+let formData = {
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    message: '',
   };
 
-  try {
-    const result = await emailService.sendEmail(emailDetails, false); // Assuming you want to send HTML email
-    console.log('Email sent:', result);
-    // Handle success, show a success message, or redirect to a thank-you page
-  } catch (error) {
-    console.error('Error sending email:', error);
-    // Handle error, show an error message, or take appropriate action
-  }
+const handleSubmit = async() => {
+  dispatch('contactFormSubmit', formData);
 }
 </script>
 <main>
@@ -74,16 +68,16 @@ async function handleSubmit() {
 
 <!-- Contact Form -->
 <div class="xl:w-1/2 p-8  ">
-  <form class="text-center">
+  <form on:submit|preventDefault={handleSubmit} class="text-center">
 
     <div class="flex flex-row ">
     <div class="mb-4 border-b-2 mr-12  w-80 ">
       <h2 class="text-left mb-2 text-sm font-poppins ml-2">First name</h2>
-      <input type="text" class="w-full p-2  border border-transparent" placeholder="Name" name="firstName" required>
+      <input type="text" bind:value={formData.firstName} class="w-full p-2  border border-transparent" placeholder="Name" name="firstName" required>
     </div>
     <div class="mb-4 border-b-2 w-80 ">
       <h2 class="text-left mb-2 text-sm font-poppins ml-2">Last name</h2>
-      <input type="text" class="w-full p-2  border border-transparent" placeholder="Last Name" name="lastName" required>
+      <input type="text" bind:value={formData.lastName} class="w-full p-2  border border-transparent" placeholder="Last Name" name="lastName" required>
     </div>
 
   </div>
@@ -91,21 +85,21 @@ async function handleSubmit() {
 <div class="flex flex-row ">
     <div class="mb-4 border-b-2  mr-12  w-80">
       <h2 class="text-left mb-2 text-sm font-poppins ml-2">Mail</h2>
-      <input type="email" class="w-full p-2 border border-transparent" placeholder="Email" name="email" required>
+      <input type="email" bind:value={formData.email} class="w-full p-2 border border-transparent" placeholder="Email" name="email" required>
     </div>
     <div class="mb-4 border-b-2 w-80">
       <h2 class="text-left mb-2 text-sm font-poppins ml-2">Phone</h2>
-      <input type="tel" class="w-full p-2 border border-transparent" placeholder="Phone" name="phone" required>
+      <input type="tel" bind:value={formData.phone} class="w-full p-2 border border-transparent" placeholder="Phone" name="phone" required>
     </div>
 
 </div>
 
     <div class="mb-4 border-b-2 ">
       <h2 class="text-left mb-2 text-sm font-poppins ml-2">Message</h2>
-      <textarea class="w-full p-2 border border-transparent" rows="4" placeholder="Message" name="message" required></textarea>
+      <textarea bind:value={formData.message} class="w-full p-2 border border-transparent" rows="4" placeholder="Message" name="message" required></textarea>
     </div>
     <div class="text-right ">
-      <button on:click={handleSubmit} type="submit" class="bg-blue-900 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded font-poppins">
+      <button type="submit" class="bg-blue-900 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded font-poppins">
         Send Message
       </button>
     </div>
