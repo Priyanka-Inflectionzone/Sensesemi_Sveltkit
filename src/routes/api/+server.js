@@ -13,7 +13,7 @@ export const POST = async (event) => {
       };
 
 	const adminEmailDetails = {
-	EmailTo: ['priyanka.kale@inflectionzone.com', 'priyankakale27@gmail.com'],
+	EmailTo: "adm.sensesemi@gmail.com",
 	Subject: 'New Contact Form Submission',
 	Body: `Name: ${data.firstName} ${data.lastName}<br>Email: ${data.email}<br>Phone: ${data.phone}<br>Message: ${data.message}`,
 	};
